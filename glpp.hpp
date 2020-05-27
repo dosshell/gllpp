@@ -176,13 +176,16 @@ const GLenum GL_SRC_ALPHA_SATURATE = 0x0308;
 //      GL_ONE_MINUS_DST_ALPHA
 
 // ErrorCode
-const GLenum GL_NO_ERROR = 0;
-const GLenum GL_INVALID_ENUM = 0x0500;
-const GLenum GL_INVALID_VALUE = 0x0501;
-const GLenum GL_INVALID_OPERATION = 0x0502;
-const GLenum GL_STACK_OVERFLOW = 0x0503;
-const GLenum GL_STACK_UNDERFLOW = 0x0504;
-const GLenum GL_OUT_OF_MEMORY = 0x0505;
+enum GLerror
+{
+    GL_NO_ERROR = 0,
+    GL_INVALID_ENUM = 0x0500,
+    GL_INVALID_VALUE = 0x0501,
+    GL_INVALID_OPERATION = 0x0502,
+    GL_STACK_OVERFLOW = 0x0503,
+    GL_STACK_UNDERFLOW = 0x0504,
+    GL_OUT_OF_MEMORY = 0x0505
+};
 
 // OpenGL 1 functions (linked at load-time)
 extern "C"
@@ -195,7 +198,7 @@ extern "C"
     __declspec(dllimport) void __stdcall glDrawArrays(GLenum mode, GLint first, GLsizei count);
     __declspec(dllimport) void __stdcall glEnable(GLenum cap);
     __declspec(dllimport) void __stdcall glGenTextures(GLsizei n, GLuint* textures);
-    __declspec(dllimport) GLenum __stdcall glGetError();
+    __declspec(dllimport) GLerror __stdcall glGetError();
     __declspec(dllimport) void __stdcall glTexImage2D(GLenum target,
                                                       GLint level,
                                                       GLint internalformat,
@@ -278,7 +281,7 @@ extern "C"
 #define LOAD(name) name = (decltype(name))wglGetProcAddress(#name)
 
 // Try to load all function, will result in nullptr if extension is not supported
-inline bool gl_init()
+inline void glInit()
 {
     LOAD(glActiveTexture);
     LOAD(glGenBuffers);
@@ -306,6 +309,4 @@ inline bool gl_init()
     LOAD(glGenerateTextureMipmap);
     LOAD(glTexImage3D);
     LOAD(glTexSubImage3D);
-
-    return true;
 }
