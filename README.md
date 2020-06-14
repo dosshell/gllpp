@@ -3,7 +3,7 @@ GLLpp
 Header-only C++17 OpenGL Loader for Windows with enum types.  
 
 ```cpp
-#include "glpp.hpp"
+#include "gllpp.hpp"
 
 int main(int argc, const char* argv[])
 {
