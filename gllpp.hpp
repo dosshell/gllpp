@@ -26,8 +26,16 @@ typedef struct __GLsync* GLsync;
 typedef int GLint;
 
 const GLenum GL_ARRAY_BUFFER = 0x8892;
-const GLenum GL_FRAGMENT_SHADER = 0x8B30;
-const GLenum GL_VERTEX_SHADER = 0x8B31;
+
+enum ShaderType
+{
+    GL_FRAGMENT_SHADER = 0x8B30,
+    GL_VERTEX_SHADER = 0x8B31,
+    GL_GEOMETRY_SHADER = 0x8DD9,
+    GL_TESS_EVALUATION_SHADER = 0x8E87,
+    GL_TESS_CONTROL_SHADER = 0x8E88,
+    GL_COMPUTE_SHADER = 0x91B9,
+};
 
 /*
 STREAM: The data store contents will be modified once and used at most a few times.
@@ -222,7 +230,7 @@ inline void(__stdcall* glBindBuffer)(GLenum target, GLuint buffer);
 inline void(__stdcall* glBufferData)(GLenum target, GLsizeiptr size, const void* data, GLenum usage);
 inline void(__stdcall* glCompileShader)(GLuint shader);
 inline GLuint(__stdcall* glCreateProgram)(void);
-inline GLuint(__stdcall* glCreateShader)(GLenum shaderType);
+inline GLuint(__stdcall* glCreateShader)(ShaderType shaderType);
 inline void(__stdcall* glDeleteProgram)(GLuint program);
 inline void(__stdcall* glDeleteShader)(GLuint shader);
 inline void(__stdcall* glEnableVertexAttribArray)(GLuint index);
