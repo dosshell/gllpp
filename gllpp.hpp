@@ -195,6 +195,33 @@ enum GLerror
     GL_OUT_OF_MEMORY = 0x0505
 };
 
+enum GLpname
+{
+    GL_SHADER_TYPE = 0x8B4F,
+    GL_DELETE_STATUS = 0x8B80,
+    GL_COMPILE_STATUS = 0x8B81,
+    GL_LINK_STATUS = 0x8B82,
+    GL_VALIDATE_STATUS = 0x8B83,
+    GL_INFO_LOG_LENGTH = 0x8B84,
+    GL_ATTACHED_SHADERS = 0x8B85,
+    // GL_ACTIVE_ATOMIC_COUNTER_BUFFERS,
+    GL_ACTIVE_ATTRIBUTES = 0x8B89,
+    GL_ACTIVE_ATTRIBUTE_MAX_LENGTH = 0x8B8A,
+    GL_ACTIVE_UNIFORMS = 0x8B86,
+    GL_SHADER_SOURCE_LENGTH = 0x8B88,
+    GL_ACTIVE_UNIFORM_BLOCKS = 0x8A36,
+    GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH = 0x8A35,
+    GL_ACTIVE_UNIFORM_MAX_LENGTH = 0x8B87,
+    // GL_COMPUTE_WORK_GROUP_SIZE,
+    // GL_PROGRAM_BINARY_LENGTH,
+    GL_TRANSFORM_FEEDBACK_BUFFER_MODE = 0x8C7F,
+    GL_TRANSFORM_FEEDBACK_VARYINGS = 0x8C83,
+    GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH = 0x8C76,
+    GL_GEOMETRY_VERTICES_OUT = 0x8916,
+    GL_GEOMETRY_INPUT_TYPE = 0x8917,
+    GL_GEOMETRY_OUTPUT_TYPE = 0x8918
+};
+
 // OpenGL 1 functions (linked at load-time)
 extern "C"
 {
@@ -264,6 +291,9 @@ inline void(__stdcall* glTexSubImage3D)(GLenum target,
 inline void(__stdcall* glUniformMatrix4fv)(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
 inline void(__stdcall* glUseProgram)(GLuint program);
 inline void(__stdcall* glVertexAttribPointer)(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer);
+inline void(__stdcall* glGetShaderiv)(GLuint shader, GLpname pname, GLint* params);
+inline void(__stdcall* glGetShaderInfoLog)(GLuint shader, GLsizei maxLength, GLsizei* length, GLchar* infoLog);
+inline void(__stdcall* glGetProgramiv)(GLuint program, GLpname pname, GLint* params);
 
 // OpenGL 3
 inline void(__stdcall* glBindVertexArray)(GLuint array);
@@ -303,6 +333,9 @@ inline void glInit()
     LOAD(glCompileShader);
     LOAD(glAttachShader);
     LOAD(glLinkProgram);
+    LOAD(glGetProgramiv);
+    LOAD(glGetShaderInfoLog);
+    LOAD(glGetShaderiv);
     LOAD(glGetUniformLocation);
     LOAD(glCreateProgram);
     LOAD(glUseProgram);
