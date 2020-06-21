@@ -329,6 +329,8 @@ inline void(__stdcall* glGetProgramiv)(GLuint program, GLpname pname, GLint* par
 
 // OpenGL 3
 inline void(__stdcall* glBindVertexArray)(GLuint array);
+inline void(__stdcall* glDrawArraysInstanced)(GLenum mode, GLint first, GLsizei count, GLsizei instancecount);
+inline void(__stdcall* glDrawElementsInstanced)(GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei instancecount);
 inline void(__stdcall* glGenVertexArrays)(GLsizei n, GLuint* arrays);
 
 // Opengl 4
@@ -354,22 +356,32 @@ extern "C"
 inline void glInit()
 {
     LOAD(glActiveTexture);
-    LOAD(glGenBuffers);
-    LOAD(glGenVertexArrays);
-    LOAD(glGenBuffers);
-    LOAD(glGenVertexArrays);
-    LOAD(glBindVertexArray);
-    LOAD(glBindBuffer);
-    LOAD(glCreateShader);
-    LOAD(glShaderSource);
-    LOAD(glCompileShader);
     LOAD(glAttachShader);
-    LOAD(glLinkProgram);
+    LOAD(glBindBuffer);
+    LOAD(glBindVertexArray);
+    LOAD(glBufferData);
+    LOAD(glCompileShader);
+    LOAD(glCreateProgram);
+    LOAD(glCreateShader);
+    LOAD(glDebugMessageCallback);
+    LOAD(glDeleteProgram);
+    LOAD(glDeleteShader);
+    LOAD(glDrawArraysInstanced);
+    LOAD(glDrawElementsInstanced);
+    LOAD(glEnableVertexAttribArray);
+    LOAD(glGenBuffers);
+    LOAD(glGenerateMipmap);
+    LOAD(glGenerateTextureMipmap);
+    LOAD(glGenVertexArrays);
+    LOAD(glGenVertexArrays);
     LOAD(glGetProgramiv);
     LOAD(glGetShaderInfoLog);
     LOAD(glGetShaderiv);
     LOAD(glGetUniformLocation);
-    LOAD(glCreateProgram);
+    LOAD(glLinkProgram);
+    LOAD(glShaderSource);
+    LOAD(glTexImage3D);
+    LOAD(glTexSubImage3D);
     LOAD(glUseProgram);
     LOAD(glUniform1f);
     LOAD(glUniform2f);
@@ -404,14 +416,5 @@ inline void glInit()
     LOAD(glUniformMatrix4x2fv);
     LOAD(glUniformMatrix3x4fv);
     LOAD(glUniformMatrix4x3fv);
-    LOAD(glDeleteProgram);
-    LOAD(glDeleteShader);
-    LOAD(glBufferData);
     LOAD(glVertexAttribPointer);
-    LOAD(glEnableVertexAttribArray);
-    LOAD(glDebugMessageCallback);
-    LOAD(glGenerateMipmap);
-    LOAD(glGenerateTextureMipmap);
-    LOAD(glTexImage3D);
-    LOAD(glTexSubImage3D);
 }
