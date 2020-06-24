@@ -332,6 +332,7 @@ inline void(__stdcall* glBindVertexArray)(GLuint array);
 inline void(__stdcall* glDrawArraysInstanced)(GLenum mode, GLint first, GLsizei count, GLsizei instancecount);
 inline void(__stdcall* glDrawElementsInstanced)(GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei instancecount);
 inline void(__stdcall* glGenVertexArrays)(GLsizei n, GLuint* arrays);
+inline void(__stdcall* glVertexAttribDivisor)(GLuint index, GLuint divisor);
 
 // Opengl 4
 using DEBUGPROC =
@@ -417,4 +418,5 @@ inline void glInit()
     LOAD(glUniformMatrix3x4fv);
     LOAD(glUniformMatrix4x3fv);
     LOAD(glVertexAttribPointer);
+    LOAD(glVertexAttribDivisor);
 }
