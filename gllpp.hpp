@@ -323,6 +323,7 @@ inline void(__stdcall* glUniformMatrix3x4fv)(GLint location, GLsizei count, GLbo
 inline void(__stdcall* glUniformMatrix4x3fv)(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
 inline void(__stdcall* glUseProgram)(GLuint program);
 inline void(__stdcall* glVertexAttribPointer)(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer);
+inline void(__stdcall* glVertexAttribIPointer)(GLuint index, GLint size, GLenum type, GLsizei stride, const void* pointer);
 inline void(__stdcall* glGetShaderiv)(GLuint shader, GLpname pname, GLint* params);
 inline void(__stdcall* glGetShaderInfoLog)(GLuint shader, GLsizei maxLength, GLsizei* length, GLchar* infoLog);
 inline void(__stdcall* glGetProgramiv)(GLuint program, GLpname pname, GLint* params);
@@ -353,7 +354,7 @@ extern "C"
 // Load macro
 #define LOAD(name) name = (decltype(name))wglGetProcAddress(#name)
 
-// Try to load all function, will result in nullptr if extension is not supported
+// Try to load all functions, will result in nullptr if not supported
 inline void glInit()
 {
     LOAD(glActiveTexture);
@@ -418,5 +419,6 @@ inline void glInit()
     LOAD(glUniformMatrix3x4fv);
     LOAD(glUniformMatrix4x3fv);
     LOAD(glVertexAttribPointer);
+    LOAD(glVertexAttribIPointer);
     LOAD(glVertexAttribDivisor);
 }
